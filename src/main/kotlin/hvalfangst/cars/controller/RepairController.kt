@@ -1,7 +1,6 @@
 package hvalfangst.cars.controller
 
-import hvalfangst.cars.model.Repair
-import hvalfangst.cars.model.requests.UpsertRepairRequest
+import hvalfangst.cars.model.Repairs
 import hvalfangst.cars.repository.RepairRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -13,18 +12,18 @@ import reactor.core.publisher.Mono
 class RepairController(private val repairRepository: RepairRepository) {
 
     @GetMapping
-    fun findAll(): Flux<Repair> {
-        return repairRepository.findAllRepairs()
+    fun findAll(): Flux<Repairs> {
+        return repairRepository.findAll()
+    }
+
+    @GetMapping("/{id}")
+    fun findById(@PathVariable id: Long): Mono<Repairs> {
+        return repairRepository.findById(id)
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody request: UpsertRepairRequest): Mono<Void> {
-        return repairRepository.createRepair(
-            request.carId,
-            request.repairType,
-            request.repairDate,
-            request.cost
-        )
+    fun create(@RequestBody request: Repairs): Mono<Repairs> {
+        return repairRepository.save(request)
     }
 }

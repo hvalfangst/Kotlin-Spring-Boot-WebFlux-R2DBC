@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono
 class CarDetailsController(private val carDetailsService: CarDetailsService) {
 
     @GetMapping("/{carId}")
-    fun getCarDetails(@PathVariable carId: Int): Mono<CarDetails> {
+    fun getCarDetails(@PathVariable carId: Long): Mono<CarDetails> {
         return carDetailsService.getCarDetails(carId)
     }
 }

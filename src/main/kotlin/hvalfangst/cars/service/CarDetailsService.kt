@@ -20,15 +20,15 @@ class CarDetailsService(
     private val insuranceRepository: InsuranceRepository,
     private val repairRepository: RepairRepository
 ) {
-    fun getCarDetails(carId: Int): Mono<CarDetails> {
-        val carMono: Mono<Car> = carRepository.getCarById(carId)
-        val ownerMono: Mono<Owner> = carMono.flatMap { ownerRepository.getOwnerById(it.ownerId) }
-        val engineMono: Mono<Engine> = carMono.flatMap { engineRepository.getEngineByCarId(it.id) }
-        val tiresFlux: Flux<Tire> = tireRepository.getTiresByCarId(carId)
-        val insurancesFlux: Flux<Insurance> = insuranceRepository.getInsurancesByCarId(carId)
-        val repairsFlux: Flux<Repair> = repairRepository.getRepairsByCarId(carId)
+    fun getCarDetails(carId: Long): Mono<CarDetails> {
+        val carsMono: Mono<Cars> = carRepository.findById(carId)
+        val ownersMono: Mono<Owners> = carsMono.flatMap { ownerRepository.findById(it.id!!) }
+        val enginesMono: Mono<Engines> = carsMono.flatMap { engineRepository.findByCarId(it.id!!) }
+        val tiresFlux: Flux<Tires> = tireRepository.findByCarId(carId)
+        val insurancesFlux: Flux<Insurance> = insuranceRepository.findByCarId(carId)
+        val repairsFlux: Flux<Repairs> = repairRepository.findByCarId(carId)
 
-        val combinedMono: Mono<CombinedMonoResult> = carMono.zipWith(ownerMono).zipWith(engineMono).map {
+        val combinedMono: Mono<CombinedMonoResult> = carsMono.zipWith(ownersMono).zipWith(enginesMono).map {
             CombinedMonoResult(it.t1.t1, it.t1.t2, it.t2)
         }
 
@@ -40,7 +40,7 @@ class CarDetailsService(
             combinedMono,
             combinedFlux
         ) { monoResult, fluxResult ->
-            CarDetails(monoResult.car, monoResult.owner, fluxResult.tires, fluxResult.insurances, fluxResult.repairs, monoResult.engine)
+            CarDetails(monoResult.cars, monoResult.owners, fluxResult.tires, fluxResult.insurances, fluxResult.repairs, monoResult.engines)
         }
 
         return carDetailsMono
@@ -48,13 +48,13 @@ class CarDetailsService(
 }
 
 data class CombinedMonoResult(
-    val car: Car,
-    val owner: Owner,
-    val engine: Engine,
+    val cars: Cars,
+    val owners: Owners,
+    val engines: Engines,
 )
 
 data class CombinedFluxResult(
-    val tires: List<Tire>,
+    val tires: List<Tires>,
     val insurances: List<Insurance>,
-    val  repairs: List<Repair>
+    val  repairs: List<Repairs>
 )

@@ -1,19 +1,18 @@
 package hvalfangst.cars.model
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.Serializable
 
 data class CarDetails(
     @JsonProperty("car")
-    val car: Car,
+    val cars: Cars,
     @JsonProperty("owner")
-    val owner: Owner,
+    val owners: Owners,
     @JsonProperty("tires")
-    val tires: List<Tire>,
+    val tires: List<Tires>,
     @JsonProperty("insurances")
     val insurance: List<Insurance>,
     @JsonProperty("repairs")
-    val repairs: List<Repair>,
+    val repairs: List<Repairs>,
     @JsonProperty("engine")
-    val engine: Engine
+    val engines: Engines
 ): Serializable

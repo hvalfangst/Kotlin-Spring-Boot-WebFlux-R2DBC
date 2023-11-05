@@ -1,25 +1,38 @@
 package hvalfangst.cars.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import jakarta.persistence.*
+import org.springframework.data.annotation.Id
 import java.io.Serializable
 import java.time.LocalDate
 
+@Entity
+@Table(name = "insurance")
 data class Insurance(
-    @JsonProperty("id")
-    val id: Int,
 
-    @JsonProperty("carId")
-    val car_id: Int,
+    @Column(name = "car_id")
+    @JsonProperty("car_id")
+    val carId: Int,
 
-    @JsonProperty("policyNumber")
-    val policy_number: String,
+    @Column(name = "policy_number")
+    @JsonProperty("policy_number")
+    val policyNumber: String,
 
+    @Column(name = "provider")
     @JsonProperty("provider")
     val provider: String,
 
-    @JsonProperty("startDate")
-    val start_date: LocalDate,
+    @Column(name = "start_date")
+    @JsonProperty("start_date")
+    val startDate: LocalDate,
 
-    @JsonProperty("endDate")
-    val end_date: LocalDate
+    @Column(name = "end_date")
+    @JsonProperty("end_date")
+    val endDate: LocalDate,
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty("id")
+    val id: Long? = null
+
 ) : Serializable

@@ -1,7 +1,6 @@
 package hvalfangst.cars.controller
 
-import hvalfangst.cars.model.Engine
-import hvalfangst.cars.model.requests.UpsertEngineRequest
+import hvalfangst.cars.model.Engines
 import hvalfangst.cars.repository.EngineRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -13,19 +12,18 @@ import reactor.core.publisher.Mono
 class EngineController(private val engineRepository: EngineRepository) {
 
     @GetMapping
-    fun findAll(): Flux<Engine> {
-        return engineRepository.findAllEngines()
+    fun findAll(): Flux<Engines> {
+        return engineRepository.findAll()
+    }
+
+    @GetMapping("/{id}")
+    fun findById(@PathVariable id: Long): Mono<Engines> {
+        return engineRepository.findByCarId(id)
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody request: UpsertEngineRequest): Mono<Void> {
-        return engineRepository.createEngine(
-            request.carId,
-            request.type,
-            request.displacement,
-            request.horsepower,
-            request.manufacturingDate
-        )
+    fun create(@RequestBody request: Engines): Mono<Engines> {
+        return engineRepository.save(request)
     }
 }
