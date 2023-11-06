@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"owner_name\": \"Igor Bogdanov\",\r\n    \"contact_info\": \"yesterday.in@norwegian.com\",\r\n    \"date_of_birth\": \"1973-04-15\"\r\n}\r\n",
+					"raw": "{\r\n    \"owner_name\": \"Reodor Felgen\",\r\n    \"contact_info\": \"fuck.blodstrutmoenn@flaaklypa.com\",\r\n    \"date_of_birth\": \"1910-04-03\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -46,6 +46,25 @@
 					"port": "8080",
 					"path": [
 						"owners"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Owner by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/owners/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"owners",
+						"1"
 					]
 				}
 			},
@@ -97,6 +116,25 @@
 			"response": []
 		},
 		{
+			"name": "Get Car by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create Repair",
 			"request": {
 				"method": "POST",
@@ -136,6 +174,25 @@
 					"port": "8080",
 					"path": [
 						"repairs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Repairs by Car ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/repairs/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"repairs",
+						"1"
 					]
 				}
 			},
@@ -187,6 +244,25 @@
 			"response": []
 		},
 		{
+			"name": "Get Engine by Car ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/engines/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engines",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create Tire",
 			"request": {
 				"method": "POST",
@@ -232,6 +308,25 @@
 			"response": []
 		},
 		{
+			"name": "Get Tires by Car ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/tires/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tires",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create Insurance",
 			"request": {
 				"method": "POST",
@@ -271,6 +366,25 @@
 					"port": "8080",
 					"path": [
 						"insurance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Insurances get by Car ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/insurance/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"insurance",
+						"1"
 					]
 				}
 			},
