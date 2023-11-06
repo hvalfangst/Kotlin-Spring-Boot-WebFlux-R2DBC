@@ -1,7 +1,6 @@
 package hvalfangst.cars.controller
 
 import hvalfangst.cars.model.Owners
-import hvalfangst.cars.model.requests.UpsertOwnerRequest
 import hvalfangst.cars.repository.OwnerRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
